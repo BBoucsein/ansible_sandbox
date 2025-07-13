@@ -1,0 +1,20 @@
+---
+- hosts: all
+  remote_user: bb
+  become: true
+  vars:
+    ansible_become_password: "{{ user_sudo_pass }}"
+  gather_facts: no
+  tasks:
+  - name: add directory etc/bb_test
+    ansible.builtin.file:
+      path: /etc/bb_test
+      state: directory
+      mode: '0755'
+  - name: write "Hello World" in file
+    ansible.builtin.blockinfile:
+      create: yes
+      path: /etc/bb_test/hello.txt
+      block: |
+        Hello World    
+    

@@ -1,0 +1,9 @@
+- hosts: all
+  remote_user: bb
+  become: true
+  vars:
+    ansible_become_password: "{{ user_sudo_pass }}"
+  gather_facts: no
+  tasks:
+  - name: add date to file bb_test.txt
+    ansible.builtin.command: "echo $(date '+%Y-%m-%d') >> /etc/bb_test/bb_test.txt"

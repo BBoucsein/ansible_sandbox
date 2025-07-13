@@ -1,0 +1,36 @@
+# Group for all hosts
+all:
+  hosts:
+    ernie:
+    bert:
+    fix:
+    foxy:
+    yin:
+    yang:
+
+prod:
+  hosts:
+    ernie:
+    fix:       
+    yin:      
+
+test:
+  hosts:    
+    bert:    
+    foxy:    
+    yang:
+
+frontend:
+  hosts:
+    ernie:
+    bert:    
+
+backend:
+  hosts:    
+    fix:
+    foxy:
+    
+database:
+  hosts:    
+    yin:
+    yang:
