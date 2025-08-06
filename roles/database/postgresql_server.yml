@@ -1,0 +1,33 @@
+---
+- hosts: database
+  remote_user: bb
+  become: true  
+  vars:  
+   ansible_become_password: "{{ user_sudo_pass }}"
+  #gther_facts: no     
+  tasks:
+  - name: Paketliste aktualisieren
+    apt:
+      update_cache: yes 
+  - name: postgres installation
+    apt:
+      name: postgresql-common
+      state: present
+      update_cache: yes
+  - name: postgress client packages
+    apt:
+      name: postgresql-client-17 
+      state: present
+      update_cache: yes  
+  - name: setup skript für postgresql
+    #shell: yes "" | sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org
+    #expect:
+    command: /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh -y
+    #responses:
+    #  'PRESS <ENTER> TO CONTINUE:': ''
+    args:
+      creates: /etc/apt/sources.list.d/pgdg.list
+      
+  - name: Aktualisiere apt cache nach PGDG Setup
+    apt:
+      update_cache: yes
